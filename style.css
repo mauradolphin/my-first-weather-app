@@ -153,3 +153,11 @@ p {
 	padding: 0;
 	opacity: 70%;
 }
+
+.footer {
+	text-align: center;
+}
+
+#open-source {
+	color: #38598b;
+}
