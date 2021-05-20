@@ -1,0 +1,168 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Maura's Weather App</title>
+		<link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6"
+			crossorigin="anonymous"
+		/>
+		<link rel="preconnect" href="https://fonts.gstatic.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&family=Roboto:wght@100;300&display=swap"
+			rel="stylesheet"
+		/>
+		<script
+			src="https://kit.fontawesome.com/263c8db784.js"
+			crossorigin="anonymous"
+		></script>
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<link rel="stylesheet" href="src/style.css" />
+	</head>
+	<body>
+		<div class="container">
+			<div class="app-wrapper">
+				<div class="nav-wrapper">
+					<!--Search Navigation-->
+
+					<nav class="navbar justify-content-left">
+						<form class="search-bar">
+							<input
+								type="text"
+								id="search-bar"
+								placeholder="   Enter a City"
+								class="search-bar-height"
+							/>
+							<input
+								type="submit"
+								class="btn search-button"
+								value="Search"
+								id="submit-city-button"
+							/>
+						</form>
+						<button id="local-search-button">
+							<i class="fas fa-location-arrow"></i>
+						</button>
+					</nav>
+				</div>
+
+				<!--Current Weather-->
+
+				<div class="row current-weather-row">
+					<div class="col-sm-4 searched-city-weather">
+						<h1 id="current-city">Tours</h1>
+						<h1>
+							<span id="current-temp">66</span>°
+							<span class="col-2"
+								><small><a href="#" id="degrees-fahrenheit">F</a></small></span
+							>
+							|
+							<span class="col-2"
+								><small><a href="#" id="degrees-celcius">C</a></small></span
+							>
+						</h1>
+						<p id="full-date-hour">Sunday 4/18/2021</p>
+
+						<h5>Sunny</h5>
+					</div>
+					<div class="col-sm-3">
+						<img class="current-sun" src="images/sunny-main.png" alt="sunny" />
+					</div>
+					<div class="col-sm-5">
+						<div class="row">
+							<div class="col-6 current-high">
+								<h5>High</h5>
+								<h2><span id="temp-high">66°F</span></h2>
+								<ul class="high-list">
+									<li>Sunrise:</li>
+									<li>Sunset:</li>
+									<li>Humidity:</li>
+								</ul>
+							</div>
+							<div class="col-6 current-low">
+								<h5>Low</h5>
+								<h2><span id="temp-low">42°F</span></h2>
+								<ul class="low-list">
+									<li id="sunrise-time-display">6:08 am</li>
+									<li id="sunset-time-display">7:24 pm</li>
+									<li><span id="humidity">20</span>%</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--Five Day Forecast-->
+				<div class="card-group forecast">
+					<div class="card">
+						<div class="card-body">
+							<p class="five-day-date" id="forecast-day-1-date">Mon 4/19</p>
+							<img
+								src="images/cloud-rain-solid.svg"
+								alt="rainy"
+								class="forecast-image"
+								id="day-1-image"
+							/>
+							<p>
+								<span id="day-1-temp-high">60°F</span> |
+								<span id="day-1-temp-low">48°F</span>
+							</p>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<p class="five-day-date">Tues 4/20</p>
+							<i class="fas fa-cloud-rain forecast-icon"></i>
+							<br />
+							<p>
+								<span id="day-2-temp-high">60°F</span> |
+								<span id="day-2-temp-low">48°F</span>
+							</p>
+						</div>
+					</div>
+
+					<div class="card">
+						<div class="card-body">
+							<p class="five-day-date">Weds 4/21</p>
+							<i class="fas fa-sun forecast-icon"></i>
+							<br />
+							<p>
+								<span id="day-3-temp-high">60°F</span> |
+								<span id="day-3-temp-low">48°F</span>
+							</p>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<p class="five-day-date">Thurs 4/22</p>
+							<i class="fas fa-cloud-sun forecast-icon"></i>
+							<br />
+							<p>
+								<span id="day-4-temp-high">60°F</span> |
+								<span id="day-4-temp-low">48°F</span>
+							</p>
+						</div>
+					</div>
+					<div class="card">
+						<div class="card-body">
+							<p class="five-day-date">Fri 4/23</p>
+							<i class="fas fa-cloud forecast-icon"></i>
+							<br />
+							<p>
+								<span id="day-5-temp-high">60°F</span> |
+								<span id="day-5-temp-low">48°F</span>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script src="src/script.js"></script>
+	</body>
+</html>

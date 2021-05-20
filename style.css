@@ -1,0 +1,155 @@
+/** @format */
+
+body {
+	background-color: #c8cde2;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	font-family: "Montserrat", sans-serif;
+}
+
+h1 {
+	color: #113f67;
+}
+
+h2 {
+	color: #38598b;
+}
+
+h5,
+h6 {
+	color: #8f9ac6;
+}
+
+ul {
+	padding: 0;
+}
+
+li {
+	list-style: none;
+	font-family: "Roboto", sans-serif;
+}
+
+a {
+	text-decoration: none;
+	color: #8f9ac6;
+}
+
+p {
+	margin-bottom: 0;
+	font-family: "Roboto", sans-serif;
+}
+
+.container {
+	border: 5px;
+	border-radius: 8px;
+}
+
+.app-wrapper {
+	background-color: #fff;
+	border-radius: 80px;
+	max-width: 46rem;
+	padding: 1.5rem;
+	box-shadow: 9px 9px 24px 6px #13223811;
+	max-width: 46rem;
+	margin: 3.5rem auto 1.5rem;
+}
+
+.nav-wrapper {
+	display: block;
+	margin: 10px 50px 10px 50px;
+}
+
+.search-bar-height {
+	border-radius: 20px;
+	border-color: #8f9ac6;
+	font-family: "Roboto", sans-serif;
+	line-height: 30px;
+}
+
+.search-button:hover {
+	background-color: #a2a8d3;
+	color: #fff;
+	border-color: #637893;
+}
+
+.search-button {
+	color: #e7eaf6;
+	background-color: #38598b;
+	border-radius: 60px;
+	font-family: "Roboto", sans-serif;
+	border-color: #c8cde2;
+	transition: all ease-in-out 200ms;
+}
+
+#local-search-button:hover {
+	background-color: #a2a8d3;
+	color: #fff;
+	border-color: #637893;
+}
+
+#local-search-button {
+	color: #e7eaf6;
+	padding: 5px 12px;
+	margin-right: 280px;
+	background-color: #38598b;
+	border-radius: 60px;
+	font-family: "Roboto", sans-serif;
+	border-color: #c8cde2;
+	transition: all ease-in-out 200ms;
+}
+
+.current-weather-row {
+	margin: 20px 10px;
+}
+
+.searched-city-weather {
+	text-align: center;
+}
+
+.current-sun {
+	max-width: 150px;
+	display: block;
+	margin: 0 auto;
+}
+
+.current-high {
+	text-align: right;
+}
+
+.current-low {
+	text-align: left;
+}
+
+.five-day-date {
+	margin-bottom: 5px;
+	font-weight: 400;
+}
+
+.forecast {
+	text-align: center;
+}
+
+.card {
+	border-radius: 25px;
+	background-color: #eff3ff;
+	margin: 10px;
+}
+
+.forecast-icon {
+	font-size: 40px;
+	color: #38598b;
+}
+
+.forecast-image {
+	max-width: 40px;
+	display: block;
+	margin: 0 auto;
+	padding: 0;
+	opacity: 70%;
+}
