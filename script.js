@@ -240,10 +240,27 @@ function showLocalData(response) {
 	let currentCityDisplay = document.querySelector("#current-city");
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
-	let timeString = sunrise.toLocaleTimeString();
+	let sunriseHour = sunrise.getHours();
+	if (sunriseHour < 10) {
+		sunriseHour = `0${sunriseHour}`;
+	}
+	let sunriseMinute = sunrise.getMinutes();
+	if (sunriseMinute < 10) {
+		sunriseMinute = `0${sunriseMinute}`;
+	}
+	let timeString = `${sunriseHour}:${sunriseMinute}`;
+
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
-	let setTimeString = sunset.toLocaleTimeString();
+	let sunsetHour = sunset.getHours();
+	if (sunsetHour < 10) {
+		sunsetHour = `0${sunsetHour}`;
+	}
+	let sunsetMinute = sunset.getMinutes();
+	if (sunsetMinute < 10) {
+		sunsetMinute = `0${sunsetMinute}`;
+	}
+	let setTimeString = `${sunsetHour}:${sunsetMinute}`;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/onecall`;
