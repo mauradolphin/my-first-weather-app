@@ -114,10 +114,19 @@ function showData(response) {
 	if (sunriseMinute < 10) {
 		sunriseMinute = `0${sunriseMinute}`;
 	}
-	let timeString = `${sunriseHour}:${sunriseMinute} AM`;
+	let timeString = `${sunriseHour}:${sunriseMinute}`;
+
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
-	let setTimeString = sunset.toLocaleTimeString();
+	let sunsetHour = sunset.getHours();
+	if (sunsetHour < 10) {
+		sunsetHour = `0${sunsetHour}`;
+	}
+	let sunsetMinute = sunset.getMinutes();
+	if (sunsetMinute < 10) {
+		sunsetMinute = `0${sunsetMinute}`;
+	}
+	let setTimeString = `${sunsetHour}:${sunsetMinute}`;
 	let city = response.data.name;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
