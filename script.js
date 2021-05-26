@@ -102,6 +102,8 @@ function showData(response) {
 	let temperatureHigh = document.querySelector("#temp-high");
 	let tempLow = Math.round(response.data.main.temp_min);
 	let temperatureLow = document.querySelector("#temp-low");
+
+	console.log(response.data.timezone);
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
 	let sunriseHour = sunrise.getHours();
@@ -213,7 +215,7 @@ function showLocalData(response) {
 	let iconUrl = `http://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
 	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
-	conElement.setAttribute("alt", response.data.weather[0].description);
+	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");
@@ -268,7 +270,7 @@ function retrievePosition(position) {
 function pageLoad() {
 	let currentCityDisplay = document.querySelector("#current-city");
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
-	let city = "Sacramento";
+	let city = "Goderich";
 	let units = "imperial";
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
