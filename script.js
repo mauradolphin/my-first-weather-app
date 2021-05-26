@@ -48,6 +48,8 @@ function showForecast(response) {
 
 function showData(response) {
 	console.log(response.data);
+	let humidity = document.querySelector("#humidity");
+	humidity.innerHTML = response.data.main.humidity;
 	let currentTemp = Math.round(response.data.main.temp);
 	let currentTempDisplay = document.querySelector("#current-temp");
 	currentTempDisplay.innerHTML = currentTemp;
@@ -215,31 +217,21 @@ function displayDate() {
 	let now = new Date();
 	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 	let month = months[now.getMonth()];
-	let days = [
-		"Sunday",
-		"Monday",
-		"Tuesday",
-		"Wednesday",
-		"Thursday",
-		"Friday",
-		"Saturday",
-	];
+	let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
 	let day = days[now.getDay()];
 	let hour = now.getHours();
+	if (hour < 10) {
+		hour = `0${hour}`;
+	}
 	let minutes = now.getMinutes();
+	if (minutes < 10) {
+		minutes = `0${minutes}`;
+	}
 	let date = now.getDate();
 	let year = now.getFullYear();
 	let currentDate = document.querySelector("#full-date-hour");
-	if (hour < 10) {
-		currentDate.innerHTML = `${day} ${month}/${date}/${year} 0${hour}:${minutes}`;
-	} else {
-		currentDate.innerHTML = `${day} ${month}/${date}/${year} ${hour}:${minutes}`;
-	}
-	if (minutes < 10) {
-		currentDate.innerHTML = `${day} ${month}/${date}/${year} ${hour}:0${minutes}`;
-	} else {
-		currentDate.innerHTML = `${day} ${month}/${date}/${year} ${hour}:${minutes}`;
-	}
+	currentDate.innerHTML = `${day} ${month}/${date}/${year} ${hour}:${minutes}`;
+	console.log(`${day} ${month}/${date}/${year} ${hour}:${minutes}`);
 }
 
 function searchLocal() {
