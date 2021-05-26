@@ -96,6 +96,10 @@ function showData(response) {
 }
 
 function showCelciusClick(response) {
+	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
+	let celciusLink = document.querySelector("#degrees-celcius");
+	fahrenheitLink.classList.remove("active");
+	celciusLink.classList.add("active");
 	let celciusTemp = Math.round(response.data.main.temp);
 	let newCelciusTemp = document.querySelector("#current-temp");
 	newCelciusTemp.innerHTML = celciusTemp;
@@ -127,6 +131,10 @@ function clickCelcius(event) {
 }
 
 function showFahrenheitClick(response) {
+	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
+	let celciusLink = document.querySelector("#degrees-celcius");
+	fahrenheitLink.classList.add("active");
+	celciusLink.classList.remove("active");
 	let fahrenheitTemp = Math.round(response.data.main.temp);
 	let newFahrenheitTemp = document.querySelector("#current-temp");
 	newFahrenheitTemp.innerHTML = fahrenheitTemp;

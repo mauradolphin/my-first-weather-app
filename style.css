@@ -118,6 +118,15 @@ p {
 	margin: 0 auto;
 }
 
+.active {
+	color: #113f67;
+	cursor: default;
+}
+
+.active:hover {
+	text-decoration: none;
+}
+
 .current-high {
 	text-align: right;
 }
