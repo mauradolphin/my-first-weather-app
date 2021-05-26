@@ -27,7 +27,7 @@ function showForecast(response) {
 	console.log(response);
 	let dayOneIconElement = document.querySelector("#icon-1");
 	let dayOneIcon = response.data.daily[0].weather[0].icon;
-	let iconUrl = `http://openweathermap.org/img/wn/`;
+	let iconUrl = `https://openweathermap.org/img/wn/`;
 	dayOneIconElement.setAttribute("src", `${iconUrl}${dayOneIcon}@2x.png`);
 	dayOneIconElement.setAttribute(
 		"alt",
@@ -87,7 +87,7 @@ function showForecast(response) {
 function showData(response) {
 	console.log(response);
 	let currentIcon = response.data.weather[0].icon;
-	let iconUrl = `http://openweathermap.org/img/wn/`;
+	let iconUrl = `https://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
 	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
