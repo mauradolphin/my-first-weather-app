@@ -161,3 +161,7 @@ p {
 #open-source {
 	color: #38598b;
 }
+
+#condition-description {
+	text-transform: capitalize;
+}

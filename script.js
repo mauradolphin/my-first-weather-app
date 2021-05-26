@@ -49,6 +49,8 @@ function showForecast(response) {
 
 function showData(response) {
 	console.log(response);
+	let description = document.querySelector("#condition-description");
+	let conditions = response.data.weather[0].description;
 	let humidity = document.querySelector("#humidity");
 	let currentTemp = Math.round(response.data.main.temp);
 	let currentTempDisplay = document.querySelector("#current-temp");
@@ -58,7 +60,6 @@ function showData(response) {
 	let temperatureLow = document.querySelector("#temp-low");
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
-	console.log(sunrise);
 	let sunriseHour = sunrise.getHours();
 	if (sunriseHour < 10) {
 		sunriseHour = `0${sunriseHour}`;
@@ -67,7 +68,6 @@ function showData(response) {
 	if (sunriseMinute < 10) {
 		sunriseMinute = `0${sunriseMinute}`;
 	}
-
 	let timeString = `${sunriseHour}:${sunriseMinute} AM`;
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
@@ -80,6 +80,7 @@ function showData(response) {
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=currently,minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
 
+	description.innerHTML = conditions;
 	humidity.innerHTML = response.data.main.humidity;
 	currentTempDisplay.innerHTML = currentTemp;
 	temperatureHigh.innerHTML = `${newTempHigh}°F`;
@@ -155,6 +156,9 @@ function clickFahrenheit(event) {
 }
 
 function showLocalData(response) {
+	let description = document.querySelector("#condition-description");
+	let conditions = response.data.weather[0].description;
+	let humidity = document.querySelector("#humidity");
 	let currentTemp = Math.round(response.data.main.temp);
 	let currentTempDisplay = document.querySelector("#current-temp");
 	let tempHigh = Math.round(response.data.main.temp_max);
@@ -176,6 +180,9 @@ function showLocalData(response) {
 	let units = "imperial";
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=current.minutelyt,hourly,alerts&appid=${apiKey}&units=${units}`;
+
+	description.innerHTML = conditions;
+	humidity.innerHTML = response.data.main.humidity;
 	currentTempDisplay.innerHTML = currentTemp;
 	temperatureHigh.innerHTML = `${tempHigh}°F`;
 	temperatureLow.innerHTML = `${tempLow}°F`;
@@ -233,6 +240,7 @@ function displayDate() {
 function searchLocal() {
 	navigator.geolocation.getCurrentPosition(retrievePosition);
 }
+
 function search(event) {
 	event.preventDefault();
 	let searchInput = document.querySelector("#search-bar");
