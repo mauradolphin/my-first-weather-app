@@ -58,7 +58,17 @@ function showData(response) {
 	let temperatureLow = document.querySelector("#temp-low");
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
-	let timeString = sunrise.toLocaleTimeString();
+	console.log(sunrise);
+	let sunriseHour = sunrise.getHours();
+	if (sunriseHour < 10) {
+		sunriseHour = `0${sunriseHour}`;
+	}
+	let sunriseMinute = sunrise.getMinutes();
+	if (sunriseMinute < 10) {
+		sunriseMinute = `0${sunriseMinute}`;
+	}
+
+	let timeString = `${sunriseHour}:${sunriseMinute} AM`;
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
 	let setTimeString = sunset.toLocaleTimeString();
@@ -79,24 +89,6 @@ function showData(response) {
 	document.querySelector("#sunset-time-display").innerHTML = setTimeString;
 	city = city.toLowerCase();
 	axios.get(apiUrl).then(showForecast);
-}
-
-function search(event) {
-	event.preventDefault();
-	let searchInput = document.querySelector("#search-bar");
-	let currentCityDisplay = document.querySelector("#current-city");
-	let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
-	let city = searchInput.value;
-	let units = "imperial";
-	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
-	let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
-	if (searchInput.value) {
-		currentCityDisplay.innerHTML = `${city}`;
-	} else {
-		currentCityDisplay.HTML = null;
-		alert("Please enter a city");
-	}
-	axios.get(apiUrl).then(showData);
 }
 
 function showCelciusClick(response) {
@@ -173,6 +165,7 @@ function showLocalData(response) {
 	let currentCityDisplay = document.querySelector("#current-city");
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
+	console.log(sunrise);
 	let timeString = sunrise.toLocaleTimeString();
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
@@ -183,11 +176,9 @@ function showLocalData(response) {
 	let units = "imperial";
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=current.minutelyt,hourly,alerts&appid=${apiKey}&units=${units}`;
-
 	currentTempDisplay.innerHTML = currentTemp;
 	temperatureHigh.innerHTML = `${tempHigh}°F`;
 	temperatureLow.innerHTML = `${tempLow}°F`;
-	city = city.toLowerCase();
 	currentCityDisplay.innerHTML = city;
 	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 	document.querySelector("#sunrise-time-display").innerHTML = timeString;
@@ -241,6 +232,23 @@ function displayDate() {
 
 function searchLocal() {
 	navigator.geolocation.getCurrentPosition(retrievePosition);
+}
+function search(event) {
+	event.preventDefault();
+	let searchInput = document.querySelector("#search-bar");
+	let currentCityDisplay = document.querySelector("#current-city");
+	let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
+	let city = searchInput.value;
+	let units = "imperial";
+	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
+	let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
+	if (searchInput.value) {
+		currentCityDisplay.innerHTML = `${city}`;
+	} else {
+		currentCityDisplay.HTML = null;
+		alert("Please enter a city");
+	}
+	axios.get(apiUrl).then(showData);
 }
 
 let form = document.querySelector("form");
