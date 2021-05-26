@@ -221,7 +221,7 @@ function clickFahrenheit(event) {
 
 function showLocalData(response) {
 	let currentIcon = response.data.weather[0].icon;
-	let iconUrl = `http://openweathermap.org/img/wn/`;
+	let iconUrl = `https://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
 	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
