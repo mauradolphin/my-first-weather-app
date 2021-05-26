@@ -47,26 +47,6 @@ function showForecast(response) {
 
 function showData(response) {
 	console.log(response);
-	let timeZone = response.data.dt;
-	console.log(timeZone);
-	let now = new Date(timeZone * 1000);
-	console.log(now);
-	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-	let month = months[now.getMonth()];
-	let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-	let day = days[now.getDay()];
-	let hour = now.getHours();
-	if (hour < 10) {
-		hour = `0${hour}`;
-	}
-	let minutes = now.getMinutes();
-	if (minutes < 10) {
-		minutes = `0${minutes}`;
-	}
-	let date = now.getDate();
-	let year = now.getFullYear();
-	let currentDate = document.querySelector("#full-date-hour");
-	currentDate.innerHTML = `${day} ${month}/${date}/${year} ${hour}:${minutes}`;
 	let humidity = document.querySelector("#humidity");
 	humidity.innerHTML = response.data.main.humidity;
 	let currentTemp = Math.round(response.data.main.temp);
@@ -180,26 +160,6 @@ function clickFahrenheit(event) {
 }
 
 function showLocalData(response) {
-	let timezone = response.data.dt;
-	let now = new Date(timezone * 1000);
-	console.log(now);
-	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-	let month = months[now.getMonth()];
-	let days = ["Sun", "Mon", "Tues", "Wed", "Thurs", "Fri", "Sat"];
-	let day = days[now.getDay()];
-	let hour = now.getHours();
-	if (hour < 10) {
-		hour = `0${hour}`;
-	}
-	let minutes = now.getMinutes();
-	if (minutes < 10) {
-		minutes = `0${minutes}`;
-	}
-	let date = now.getDate();
-	let year = now.getFullYear();
-	let currentDate = document.querySelector("#full-date-hour");
-	console.log(`${day} ${month}/${date}/${year} ${hour}:${minutes}`);
-	currentDate.innerHTML = `${day} ${month}/${date}/${year} ${hour}:${minutes}`;
 	let currentTemp = Math.round(response.data.main.temp);
 	let currentTempDisplay = document.querySelector("#current-temp");
 	currentTempDisplay.innerHTML = currentTemp;
@@ -290,3 +250,4 @@ let localTemperature = document.querySelector("#local-search-button");
 localTemperature.addEventListener("click", searchLocal);
 
 pageLoad();
+displayDate();
