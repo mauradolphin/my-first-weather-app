@@ -24,6 +24,43 @@ function showCelciusForecast(response) {
 }
 
 function showForecast(response) {
+	console.log(response);
+	let dayOneIconElement = document.querySelector("#icon-1");
+	let dayOneIcon = response.data.daily[0].weather[0].icon;
+	let iconUrl = `http://openweathermap.org/img/wn/`;
+	dayOneIconElement.setAttribute("src", `${iconUrl}${dayOneIcon}@2x.png`);
+	dayOneIconElement.setAttribute(
+		"alt",
+		response.data.daily[0].weather[0].description
+	);
+	let dayTwoIconElement = document.querySelector("#icon-2");
+	let dayTwoIcon = response.data.daily[1].weather[0].icon;
+	dayTwoIconElement.setAttribute("src", `${iconUrl}${dayTwoIcon}@2x.png`);
+	dayTwoIconElement.setAttribute(
+		"alt",
+		response.data.daily[1].weather[0].description
+	);
+	let dayThreeIconElement = document.querySelector("#icon-3");
+	let dayThreeIcon = response.data.daily[2].weather[0].icon;
+	dayThreeIconElement.setAttribute("src", `${iconUrl}${dayThreeIcon}@2x.png`);
+	dayThreeIconElement.setAttribute(
+		"alt",
+		response.data.daily[2].weather[0].description
+	);
+	let dayFourIconElement = document.querySelector("#icon-4");
+	let dayFourIcon = response.data.daily[3].weather[0].icon;
+	dayFourIconElement.setAttribute("src", `${iconUrl}${dayFourIcon}@2x.png`);
+	dayFourIconElement.setAttribute(
+		"alt",
+		response.data.daily[3].weather[0].description
+	);
+	let dayFiveIconElement = document.querySelector("#icon-5");
+	let dayFiveIcon = response.data.daily[4].weather[0].icon;
+	dayFiveIconElement.setAttribute("src", `${iconUrl}${dayFiveIcon}@2x.png`);
+	dayFiveIconElement.setAttribute(
+		"alt",
+		response.data.daily[4].weather[0].description
+	);
 	let dayOneHigh = Math.round(response.data.daily[0].temp.max);
 	let dayOneLow = Math.round(response.data.daily[0].temp.min);
 	let dayTwoHigh = Math.round(response.data.daily[1].temp.max);
@@ -49,6 +86,11 @@ function showForecast(response) {
 
 function showData(response) {
 	console.log(response);
+	let currentIcon = response.data.weather[0].icon;
+	let iconUrl = `http://openweathermap.org/img/wn/`;
+	let iconElement = document.querySelector("#today-icon");
+	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
+	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");
@@ -167,6 +209,11 @@ function clickFahrenheit(event) {
 }
 
 function showLocalData(response) {
+	let currentIcon = response.data.weather[0].icon;
+	let iconUrl = `http://openweathermap.org/img/wn/`;
+	let iconElement = document.querySelector("#today-icon");
+	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
+	conElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");

@@ -112,9 +112,11 @@ p {
 	text-align: center;
 }
 
-.current-sun {
-	max-width: 150px;
+#today-icon {
+	width: 200px;
+	max-width: 200px;
 	display: block;
+	padding: 10px;
 	margin: 0 auto;
 }
 
