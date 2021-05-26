@@ -49,6 +49,8 @@ function showForecast(response) {
 
 function showData(response) {
 	console.log(response);
+	let windElement = document.querySelector("#wind");
+	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");
 	let conditions = response.data.weather[0].description;
 	let humidity = document.querySelector("#humidity");
@@ -80,6 +82,7 @@ function showData(response) {
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=currently,minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
 
+	windElement.innerHTML = Math.round(windSpeed);
 	description.innerHTML = conditions;
 	humidity.innerHTML = response.data.main.humidity;
 	currentTempDisplay.innerHTML = currentTemp;
@@ -156,6 +159,8 @@ function clickFahrenheit(event) {
 }
 
 function showLocalData(response) {
+	let windElement = document.querySelector("#wind");
+	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");
 	let conditions = response.data.weather[0].description;
 	let humidity = document.querySelector("#humidity");
@@ -169,7 +174,6 @@ function showLocalData(response) {
 	let currentCityDisplay = document.querySelector("#current-city");
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
-	console.log(sunrise);
 	let timeString = sunrise.toLocaleTimeString();
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
@@ -181,6 +185,7 @@ function showLocalData(response) {
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=current.minutelyt,hourly,alerts&appid=${apiKey}&units=${units}`;
 
+	windElement.innerHTML = Math.round(windSpeed);
 	description.innerHTML = conditions;
 	humidity.innerHTML = response.data.main.humidity;
 	currentTempDisplay.innerHTML = currentTemp;
