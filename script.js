@@ -24,7 +24,6 @@ function showCelciusForecast(response) {
 }
 
 function showForecast(response) {
-	console.log(response);
 	let dayOneIconElement = document.querySelector("#icon-1");
 	let dayOneIcon = response.data.daily[0].weather[0].icon;
 	let iconUrl = `https://openweathermap.org/img/wn/`;
@@ -102,8 +101,10 @@ function showData(response) {
 	let temperatureHigh = document.querySelector("#temp-high");
 	let tempLow = Math.round(response.data.main.temp_min);
 	let temperatureLow = document.querySelector("#temp-low");
-
-	console.log(response.data.timezone);
+	let dateElement = document.querySelector("#full-date-hour");
+	let timestamp = response.data.dt;
+	let timezone = response.data.timezone;
+	dateElement.innerHTML = displaySearchedDate(timestamp * 1000 + timezone);
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
 	let sunriseHour = sunrise.getHours();
@@ -114,7 +115,7 @@ function showData(response) {
 	if (sunriseMinute < 10) {
 		sunriseMinute = `0${sunriseMinute}`;
 	}
-	let timeString = `${sunriseHour}:${sunriseMinute}`;
+	let sunriseTimeString = `${sunriseHour}:${sunriseMinute}`;
 
 	let sunsetTime = response.data.sys.sunset;
 	let sunset = new Date(sunsetTime * 1000);
@@ -126,7 +127,7 @@ function showData(response) {
 	if (sunsetMinute < 10) {
 		sunsetMinute = `0${sunsetMinute}`;
 	}
-	let setTimeString = `${sunsetHour}:${sunsetMinute}`;
+	let sunsetTimeString = `${sunsetHour}:${sunsetMinute}`;
 	let city = response.data.name;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
@@ -142,8 +143,8 @@ function showData(response) {
 	temperatureHigh.innerHTML = `${newTempHigh}°F`;
 	temperatureLow.innerHTML = `${tempLow}°F`;
 	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-	document.querySelector("#sunrise-time-display").innerHTML = timeString;
-	document.querySelector("#sunset-time-display").innerHTML = setTimeString;
+	document.querySelector("#sunrise-time-display").innerHTML = sunriseTimeString;
+	document.querySelector("#sunset-time-display").innerHTML = sunsetTimeString;
 	city = city.toLowerCase();
 	axios.get(apiUrl).then(showForecast);
 }
@@ -296,13 +297,42 @@ function retrievePosition(position) {
 function pageLoad() {
 	let currentCityDisplay = document.querySelector("#current-city");
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/weather`;
-	let city = "Goderich";
+	let city = "Chicago";
 	let units = "imperial";
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
 	currentCityDisplay.innerHTML = city;
 
 	axios.get(apiUrl).then(showData);
+}
+
+function displaySearchedDate(timestamp) {
+	console.log(timestamp);
+	let date = new Date(timestamp);
+	let hours = date.getHours();
+	if (hours < 10) {
+		hours = `0${hours}`;
+	}
+	let minutes = date.getMinutes();
+	if (minutes < 10) {
+		minutes = `0${minutes}`;
+	}
+
+	let days = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
+	let day = days[date.getDay()];
+	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+	let month = months[date.getMonth()];
+	let dayOfWeek = date.getDate();
+	let year = date.getFullYear();
+	return `${day} ${month}/${dayOfWeek}/${year} ${hours}:${minutes}`;
 }
 
 function displayDate() {
