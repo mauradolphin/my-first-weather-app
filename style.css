@@ -15,6 +15,7 @@ h6 {
 
 h1 {
 	color: #113f67;
+	margin-bottom: 0;
 }
 
 h2 {
@@ -110,6 +111,10 @@ p {
 
 .searched-city-weather {
 	text-align: center;
+}
+
+#current-city {
+	margin-bottom: 8px;
 }
 
 #today-icon {

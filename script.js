@@ -84,7 +84,10 @@ function showForecast(response) {
 }
 
 function showData(response) {
-	console.log(response);
+	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
+	let celciusLink = document.querySelector("#degrees-celcius");
+	fahrenheitLink.classList.add("active");
+	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
 	let iconUrl = `https://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
@@ -209,6 +212,10 @@ function clickFahrenheit(event) {
 }
 
 function showLocalData(response) {
+	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
+	let celciusLink = document.querySelector("#degrees-celcius");
+	fahrenheitLink.classList.add("active");
+	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
 	let iconUrl = `https://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
