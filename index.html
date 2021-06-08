@@ -25,162 +25,176 @@
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 		<link rel="stylesheet" href="style.css" />
 	</head>
-	<body>
-		<div class="container">
-			<div class="app-wrapper">
-				<div class="nav-wrapper">
-					<!--Search Navigation-->
+	<body class="body">
+		<div class="test1">
+			<div class="container">
+				<div class="app-wrapper">
+					<div class="nav-wrapper">
+						<!--Search Navigation-->
 
-					<nav class="navbar justify-content-left">
-						<form class="search-bar">
-							<input
-								type="text"
-								id="search-bar"
-								placeholder="   Enter a City"
-								class="search-bar-height"
+						<nav class="navbar justify-content-left">
+							<form class="search-bar">
+								<input
+									type="text"
+									id="search-bar"
+									placeholder="   Enter a City"
+									class="search-bar-height"
+								/>
+								<input
+									type="submit"
+									class="btn search-button"
+									value="Search"
+									id="submit-city-button"
+								/>
+							</form>
+							<button id="local-search-button">
+								<i class="fas fa-location-arrow"></i>
+							</button>
+						</nav>
+					</div>
+
+					<!--Current Weather-->
+
+					<div class="row current-weather-row">
+						<div class="col-sm-4 searched-city-weather">
+							<h1 id="current-city"></h1>
+							<h1>
+								<span id="current-temp">66</span>°
+								<span class="col-2"
+									><small
+										><a href="#" id="degrees-fahrenheit" class="active"
+											>F</a
+										></small
+									></span
+								>
+								|
+								<span class="col-2"
+									><small><a href="#" id="degrees-celcius">C</a></small></span
+								>
+							</h1>
+							<small id="last-updated">Last Updated</small> <br />
+							<p id="full-date-hour">Sunday 4/18/2021</p>
+
+							<h5 id="condition-description">Sunny</h5>
+						</div>
+						<div class="col-sm-3">
+							<img
+								class="current-sun"
+								id="today-icon"
+								src="images/09d.png"
+								alt="sunny"
 							/>
-							<input
-								type="submit"
-								class="btn search-button"
-								value="Search"
-								id="submit-city-button"
-							/>
-						</form>
-						<button id="local-search-button">
-							<i class="fas fa-location-arrow"></i>
-						</button>
-					</nav>
-				</div>
+						</div>
+						<div class="col-sm-5">
+							<div class="row">
+								<div class="col-6 current-high">
+									<h5>High</h5>
+									<h2><span id="temp-high">66°F</span></h2>
 
-				<!--Current Weather-->
+									<ul class="high-list">
+										<li>Feels Like:</li>
+										<li>Humidity:</li>
+										<li>Wind Speed:</li>
+										<li>UV Index:</li>
+									</ul>
+								</div>
+								<div class="col-6 current-low">
+									<h5>Low</h5>
+									<h2><span id="temp-low">42°F</span></h2>
 
-				<div class="row current-weather-row">
-					<div class="col-sm-4 searched-city-weather">
-						<h1 id="current-city"></h1>
-						<h1>
-							<span id="current-temp">66</span>°
-							<span class="col-2"
-								><small
-									><a href="#" id="degrees-fahrenheit" class="active"
-										>F</a
-									></small
-								></span
-							>
-							|
-							<span class="col-2"
-								><small><a href="#" id="degrees-celcius">C</a></small></span
-							>
-						</h1>
-						<small id="last-updated">Last Updated</small> <br />
-						<p id="full-date-hour">Sunday 4/18/2021</p>
-
-						<h5 id="condition-description">Sunny</h5>
-					</div>
-					<div class="col-sm-3">
-						<img
-							class="current-sun"
-							id="today-icon"
-							src="images/09d.png"
-							alt="sunny"
-						/>
-					</div>
-					<div class="col-sm-5">
-						<div class="row">
-							<div class="col-6 current-high">
-								<h5>High</h5>
-								<h2><span id="temp-high">66°F</span></h2>
-								<ul class="high-list">
-									<li>Feels Like:</li>
-									<li>Humidity:</li>
-									<li>Wind Speed:</li>
-								</ul>
-							</div>
-							<div class="col-6 current-low">
-								<h5>Low</h5>
-								<h2><span id="temp-low">42°F</span></h2>
-								<ul class="low-list">
-									<li>
-										<span id="feels-like-display"></span>
-										<span id="feels-like-unit">°F</span>
-									</li>
-									<li><span id="humidity">20</span>%</li>
-									<li><span id="wind">5</span> mi/h</li>
-								</ul>
+									<ul class="low-list">
+										<li>
+											<span id="feels-like-display"></span>
+											<span id="feels-like-unit">°F</span>
+										</li>
+										<li><span id="humidity">20</span>%</li>
+										<li><span id="wind">5</span> mi/h</li>
+										<li><span id="uvi"></span></li>
+									</ul>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<!--Five Day Forecast-->
-				<div class="card-group forecast">
-					<div class="card">
-						<div class="card-body">
-							<p class="five-day-date" id="forecast-day-1-date">Tomorrow</p>
-							<img src="images/04d.png" alt="" id="icon-1" />
-							<br />
-							<p>
-								<span id="day-1-temp-high">60°F</span> |
-								<span id="day-1-temp-low">48°F</span>
-							</p>
+					<!--Five Day Forecast-->
+					<div class="card-group forecast">
+						<div class="card">
+							<div class="card-body">
+								<p class="five-day-date" id="forecast-day-1-date">Tomorrow</p>
+								<img src="images/04d.png" alt="" id="icon-1" />
+								<br />
+								<p>
+									<span id="day-1-temp-high">60°F</span> |
+									<span id="day-1-temp-low">48°F</span>
+								</p>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<div class="card-body">
-							<p class="five-day-date">Two Days</p>
-							<img src="images/10d.png" alt="" id="icon-2" />
-							<br />
-							<p>
-								<span id="day-2-temp-high">60°F</span> |
-								<span id="day-2-temp-low">48°F</span>
-							</p>
+						<div class="card">
+							<div class="card-body">
+								<p class="five-day-date">Two Days</p>
+								<img src="images/10d.png" alt="" id="icon-2" />
+								<br />
+								<p>
+									<span id="day-2-temp-high">60°F</span> |
+									<span id="day-2-temp-low">48°F</span>
+								</p>
+							</div>
 						</div>
-					</div>
 
-					<div class="card">
-						<div class="card-body">
-							<p class="five-day-date">Three Days</p>
-							<img src="images/02d.png" alt="" id="icon-3" />
-							<br />
-							<p>
-								<span id="day-3-temp-high">60°F</span> |
-								<span id="day-3-temp-low">48°F</span>
-							</p>
+						<div class="card">
+							<div class="card-body">
+								<p class="five-day-date">Three Days</p>
+								<img src="images/02d.png" alt="" id="icon-3" />
+								<br />
+								<p>
+									<span id="day-3-temp-high">60°F</span> |
+									<span id="day-3-temp-low">48°F</span>
+								</p>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<div class="card-body">
-							<p class="five-day-date">Four Days</p>
-							<img src="images/50d.png" alt="" id="icon-4" />
-							<br />
-							<p>
-								<span id="day-4-temp-high">60°F</span> |
-								<span id="day-4-temp-low">48°F</span>
-							</p>
+						<div class="card">
+							<div class="card-body">
+								<p class="five-day-date">Four Days</p>
+								<img src="images/50d.png" alt="" id="icon-4" />
+								<br />
+								<p>
+									<span id="day-4-temp-high">60°F</span> |
+									<span id="day-4-temp-low">48°F</span>
+								</p>
+							</div>
 						</div>
-					</div>
-					<div class="card">
-						<div class="card-body">
-							<p class="five-day-date">Five Days</p>
-							<img src="images/11d.png" alt="" id="icon-5" />
-							<br />
-							<p>
-								<span id="day-5-temp-high">60°F</span> |
-								<span id="day-5-temp-low">48°F</span>
-							</p>
+						<div class="card">
+							<div class="card-body">
+								<p class="five-day-date">Five Days</p>
+								<img src="images/11d.png" alt="" id="icon-5" />
+								<br />
+								<p>
+									<span id="day-5-temp-high">60°F</span> |
+									<span id="day-5-temp-low">48°F</span>
+								</p>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="footer">
-			<a
-				href="https://github.com/mauradolphin/my-first-weather-app"
-				id="open-source"
-				target="_blank"
-				rel="noreferrer"
-				>Open Source Code</a
-			>
-			by Maura Dolphin
+
+			<div class="footer">
+				<a
+					href="https://github.com/mauradolphin/my-first-weather-app"
+					id="open-source"
+					target="_blank"
+					rel="noreferrer"
+					>Open-Source Code</a
+				>
+				by
+				<a
+					href="https://www.linkedin.com/in/maura-lenahan-dolphin-6ab2b381/"
+					id="maura"
+					target="_blank"
+					rel="noreferrer"
+					>Maura Dolphin
+				</a>
+			</div>
 		</div>
 		<script src="script.js"></script>
 	</body>

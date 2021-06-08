@@ -24,7 +24,9 @@ function showCelciusForecast(response) {
 }
 
 function showForecast(response) {
-	console.log(response);
+	let uvi = document.querySelector("#uvi");
+	let uviValue = response.data.current.uvi;
+	uvi.innerHTML = Math.round(uviValue);
 	let dayOneIconElement = document.querySelector("#icon-1");
 	let dayOneIcon = response.data.daily[0].weather[0].icon;
 	let iconUrl = `https://openweathermap.org/img/wn/`;
@@ -85,6 +87,7 @@ function showForecast(response) {
 }
 
 function showData(response) {
+	console.log(response);
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
 	fahrenheitLink.classList.add("active");

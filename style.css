@@ -115,11 +115,15 @@ p {
 
 #current-city {
 	margin-bottom: 8px;
+	text-transform: uppercase;
+	line-height: 2 em;
+	font-size: 26px;
+	font-weight: bold;
 }
 
 #today-icon {
-	width: 200px;
-	max-width: 200px;
+	width: 180px;
+	max-width: 250px;
 	display: block;
 	margin: 0 auto;
 }
@@ -128,7 +132,7 @@ p {
 #icon-3,
 #icon-4,
 #icon-5 {
-	max-width: 100px;
+	max-width: 80px;
 	margin: 5px;
 }
 
@@ -172,6 +176,10 @@ p {
 	margin: 10px;
 }
 
+.card-body {
+	padding: none;
+}
+
 .forecast-icon {
 	font-size: 40px;
 	color: #38598b;
@@ -199,4 +207,9 @@ p {
 
 #last-updated {
 	color: #8f9ac6;
+}
+
+#maura {
+	color: black;
+	text-decoration: none;
 }
