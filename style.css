@@ -176,3 +176,7 @@ p {
 #condition-description {
 	text-transform: capitalize;
 }
+
+#last-updated {
+	color: #8f9ac6;
+}

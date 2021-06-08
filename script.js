@@ -103,8 +103,7 @@ function showData(response) {
 	let temperatureLow = document.querySelector("#temp-low");
 	let dateElement = document.querySelector("#full-date-hour");
 	let timestamp = response.data.dt;
-	let timezone = response.data.timezone;
-	dateElement.innerHTML = displaySearchedDate(timestamp * 1000 + timezone);
+	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
 	let sunriseHour = sunrise.getHours();
@@ -239,6 +238,9 @@ function showLocalData(response) {
 	let temperatureLow = document.querySelector("#temp-low");
 	let city = response.data.name;
 	let currentCityDisplay = document.querySelector("#current-city");
+	let dateElement = document.querySelector("#full-date-hour");
+	let timestamp = response.data.dt;
+	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
 	let sunriseHour = sunrise.getHours();
@@ -307,7 +309,6 @@ function pageLoad() {
 }
 
 function displaySearchedDate(timestamp) {
-	console.log(timestamp);
 	let date = new Date(timestamp);
 	let hours = date.getHours();
 	if (hours < 10) {
