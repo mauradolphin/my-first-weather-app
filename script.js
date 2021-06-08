@@ -27,35 +27,35 @@ function showForecast(response) {
 	let dayOneIconElement = document.querySelector("#icon-1");
 	let dayOneIcon = response.data.daily[0].weather[0].icon;
 	let iconUrl = `https://openweathermap.org/img/wn/`;
-	dayOneIconElement.setAttribute("src", `${iconUrl}${dayOneIcon}@2x.png`);
+	dayOneIconElement.setAttribute("src", `images/${dayOneIcon}.png`);
 	dayOneIconElement.setAttribute(
 		"alt",
 		response.data.daily[0].weather[0].description
 	);
 	let dayTwoIconElement = document.querySelector("#icon-2");
 	let dayTwoIcon = response.data.daily[1].weather[0].icon;
-	dayTwoIconElement.setAttribute("src", `${iconUrl}${dayTwoIcon}@2x.png`);
+	dayTwoIconElement.setAttribute("src", `images/${dayTwoIcon}.png`);
 	dayTwoIconElement.setAttribute(
 		"alt",
 		response.data.daily[1].weather[0].description
 	);
 	let dayThreeIconElement = document.querySelector("#icon-3");
 	let dayThreeIcon = response.data.daily[2].weather[0].icon;
-	dayThreeIconElement.setAttribute("src", `${iconUrl}${dayThreeIcon}@2x.png`);
+	dayThreeIconElement.setAttribute("src", `images/${dayThreeIcon}.png`);
 	dayThreeIconElement.setAttribute(
 		"alt",
 		response.data.daily[2].weather[0].description
 	);
 	let dayFourIconElement = document.querySelector("#icon-4");
 	let dayFourIcon = response.data.daily[3].weather[0].icon;
-	dayFourIconElement.setAttribute("src", `${iconUrl}${dayFourIcon}@2x.png`);
+	dayFourIconElement.setAttribute("src", `images/${dayFourIcon}.png`);
 	dayFourIconElement.setAttribute(
 		"alt",
 		response.data.daily[3].weather[0].description
 	);
 	let dayFiveIconElement = document.querySelector("#icon-5");
 	let dayFiveIcon = response.data.daily[4].weather[0].icon;
-	dayFiveIconElement.setAttribute("src", `${iconUrl}${dayFiveIcon}@2x.png`);
+	dayFiveIconElement.setAttribute("src", `images/${dayFiveIcon}.png`);
 	dayFiveIconElement.setAttribute(
 		"alt",
 		response.data.daily[4].weather[0].description
@@ -89,9 +89,8 @@ function showData(response) {
 	fahrenheitLink.classList.add("active");
 	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
-	let iconUrl = `https://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
-	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
+	iconElement.setAttribute("src", `images/${currentIcon}.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
@@ -110,7 +109,8 @@ function showData(response) {
 	let feelsLike = response.data.main.feels_like;
 	let feelsLikeElement = document.querySelector("#feels-like-display");
 	feelsLikeElement.innerHTML = Math.round(feelsLike);
-
+	let feelsLikeUnit = document.querySelector("#feels-like-unit");
+	feelsLikeUnit.innerHTML = "°F";
 	let city = response.data.name;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
@@ -217,9 +217,8 @@ function showLocalData(response) {
 	fahrenheitLink.classList.add("active");
 	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
-	let iconUrl = `https://openweathermap.org/img/wn/`;
 	let iconElement = document.querySelector("#today-icon");
-	iconElement.setAttribute("src", `${iconUrl}${currentIcon}@2x.png`);
+	iconElement.setAttribute("src", `images/${currentIcon}.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
@@ -238,6 +237,8 @@ function showLocalData(response) {
 	let feelsLike = response.data.main.feels_like;
 	let feelsLikeElement = document.querySelector("#feels-like-display");
 	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	let feelsLikeUnit = document.querySelector("#feels-like-unit");
+	feelsLikeUnit.innerHTML = "°F";
 	let timestamp = response.data.dt;
 	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
 	let latitude = response.data.coord.lat;
@@ -345,11 +346,11 @@ function search(event) {
 	let apiUrl = `${apiEndpoint}?q=${city}&appid=${apiKey}&units=${units}`;
 	if (searchInput.value) {
 		currentCityDisplay.innerHTML = `${city}`;
+		axios.get(apiUrl).then(showData);
 	} else {
 		currentCityDisplay.HTML = null;
 		alert("Please enter a city");
 	}
-	axios.get(apiUrl).then(showData);
 }
 
 let form = document.querySelector("form");
