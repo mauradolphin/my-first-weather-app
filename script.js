@@ -104,6 +104,11 @@ function showData(response) {
 	let dateElement = document.querySelector("#full-date-hour");
 	let timestamp = response.data.dt;
 	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
+	let feelsLike = response.data.main.feels_like;
+	let feelsLikeElement = document.querySelector("#feels-like-display");
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+
+	//TO EDIT
 	let sunriseTime = response.data.sys.sunrise;
 	let sunrise = new Date(sunriseTime * 1000);
 	let sunriseHour = sunrise.getHours();
@@ -127,6 +132,7 @@ function showData(response) {
 		sunsetMinute = `0${sunsetMinute}`;
 	}
 	let sunsetTimeString = `${sunsetHour}:${sunsetMinute}`;
+
 	let city = response.data.name;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
@@ -142,8 +148,6 @@ function showData(response) {
 	temperatureHigh.innerHTML = `${newTempHigh}°F`;
 	temperatureLow.innerHTML = `${tempLow}°F`;
 	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-	document.querySelector("#sunrise-time-display").innerHTML = sunriseTimeString;
-	document.querySelector("#sunset-time-display").innerHTML = sunsetTimeString;
 	city = city.toLowerCase();
 	axios.get(apiUrl).then(showForecast);
 }
