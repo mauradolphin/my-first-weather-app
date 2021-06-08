@@ -24,6 +24,7 @@ function showCelciusForecast(response) {
 }
 
 function showForecast(response) {
+	console.log(response);
 	let dayOneIconElement = document.querySelector("#icon-1");
 	let dayOneIcon = response.data.daily[0].weather[0].icon;
 	let iconUrl = `https://openweathermap.org/img/wn/`;

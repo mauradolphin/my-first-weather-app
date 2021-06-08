@@ -121,7 +121,6 @@ p {
 	width: 200px;
 	max-width: 200px;
 	display: block;
-	padding: 10px;
 	margin: 0 auto;
 }
 #icon-1,
@@ -130,6 +129,15 @@ p {
 #icon-4,
 #icon-5 {
 	max-width: 100px;
+	margin: 5px;
+}
+
+#day-1-temp-low,
+#day-2-temp-low,
+#day-3-temp-low,
+#day-4-temp-low,
+#day-5-temp-low {
+	opacity: 0.5;
 }
 
 .active {
