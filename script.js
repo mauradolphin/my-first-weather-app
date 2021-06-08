@@ -108,31 +108,6 @@ function showData(response) {
 	let feelsLikeElement = document.querySelector("#feels-like-display");
 	feelsLikeElement.innerHTML = Math.round(feelsLike);
 
-	//TO EDIT
-	let sunriseTime = response.data.sys.sunrise;
-	let sunrise = new Date(sunriseTime * 1000);
-	let sunriseHour = sunrise.getHours();
-	if (sunriseHour < 10) {
-		sunriseHour = `0${sunriseHour}`;
-	}
-	let sunriseMinute = sunrise.getMinutes();
-	if (sunriseMinute < 10) {
-		sunriseMinute = `0${sunriseMinute}`;
-	}
-	let sunriseTimeString = `${sunriseHour}:${sunriseMinute}`;
-
-	let sunsetTime = response.data.sys.sunset;
-	let sunset = new Date(sunsetTime * 1000);
-	let sunsetHour = sunset.getHours();
-	if (sunsetHour < 10) {
-		sunsetHour = `0${sunsetHour}`;
-	}
-	let sunsetMinute = sunset.getMinutes();
-	if (sunsetMinute < 10) {
-		sunsetMinute = `0${sunsetMinute}`;
-	}
-	let sunsetTimeString = `${sunsetHour}:${sunsetMinute}`;
-
 	let city = response.data.name;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
@@ -168,6 +143,11 @@ function showCelciusClick(response) {
 	celciusLow.innerHTML = `${resultLow}°C`;
 	let city = response.data.name;
 	city = city.toLowerCase();
+	let feelsLike = response.data.main.feels_like;
+	let feelsLikeElement = document.querySelector("#feels-like-display");
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	let feelsLikeUnit = document.querySelector("#feels-like-unit");
+	feelsLikeUnit.innerHTML = "°C";
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/onecall`;
@@ -201,6 +181,11 @@ function showFahrenheitClick(response) {
 	let fahrenheitLow = document.querySelector("#temp-low");
 	let fahrenheitResultLow = Math.round(response.data.main.temp_min);
 	fahrenheitLow.innerHTML = `${fahrenheitResultLow}°F`;
+	let feelsLike = response.data.main.feels_like;
+	let feelsLikeElement = document.querySelector("#feels-like-display");
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	let feelsLikeUnit = document.querySelector("#feels-like-unit");
+	feelsLikeUnit.innerHTML = "°F";
 	let city = response.data.name;
 	city = city.toLowerCase();
 	let latitude = response.data.coord.lat;
@@ -243,31 +228,11 @@ function showLocalData(response) {
 	let city = response.data.name;
 	let currentCityDisplay = document.querySelector("#current-city");
 	let dateElement = document.querySelector("#full-date-hour");
+	let feelsLike = response.data.main.feels_like;
+	let feelsLikeElement = document.querySelector("#feels-like-display");
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
 	let timestamp = response.data.dt;
 	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
-	let sunriseTime = response.data.sys.sunrise;
-	let sunrise = new Date(sunriseTime * 1000);
-	let sunriseHour = sunrise.getHours();
-	if (sunriseHour < 10) {
-		sunriseHour = `0${sunriseHour}`;
-	}
-	let sunriseMinute = sunrise.getMinutes();
-	if (sunriseMinute < 10) {
-		sunriseMinute = `0${sunriseMinute}`;
-	}
-	let timeString = `${sunriseHour}:${sunriseMinute}`;
-
-	let sunsetTime = response.data.sys.sunset;
-	let sunset = new Date(sunsetTime * 1000);
-	let sunsetHour = sunset.getHours();
-	if (sunsetHour < 10) {
-		sunsetHour = `0${sunsetHour}`;
-	}
-	let sunsetMinute = sunset.getMinutes();
-	if (sunsetMinute < 10) {
-		sunsetMinute = `0${sunsetMinute}`;
-	}
-	let setTimeString = `${sunsetHour}:${sunsetMinute}`;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/onecall`;
@@ -283,8 +248,6 @@ function showLocalData(response) {
 	temperatureLow.innerHTML = `${tempLow}°F`;
 	currentCityDisplay.innerHTML = city;
 	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
-	document.querySelector("#sunrise-time-display").innerHTML = timeString;
-	document.querySelector("#sunset-time-display").innerHTML = setTimeString;
 
 	axios.get(apiUrl).then(showForecast);
 }
