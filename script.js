@@ -41,9 +41,27 @@ function formatDay(timestamp) {
 
 function showForecast(response) {
 	console.log(response.data.daily);
-	let forecast = response.data.daily[1].dt;
-	let forecastDates = document.querySelector("#forecast-day-1-date");
-	forecastDates.innerHTML = formatDay(forecast);
+	let forecastOne = response.data.daily[1].dt;
+	let DayOne = document.querySelector("#forecast-day-1-date");
+	DayOne.innerHTML = formatDay(forecastOne);
+
+	let forecastTwo = response.data.daily[2].dt;
+	console.log(forecastTwo);
+	let DayTwo = document.querySelector("#forecast-day-2-date");
+	DayTwo.innerHTML = formatDay(forecastTwo);
+
+	let forecastThree = response.data.daily[3].dt;
+	let DayThree = document.querySelector("#forecast-day-3-date");
+	DayThree.innerHTML = formatDay(forecastThree);
+
+	let forecastFour = response.data.daily[4].dt;
+	let DayFour = document.querySelector("#forecast-day-4-date");
+	DayFour.innerHTML = formatDay(forecastFour);
+
+	let forecastFive = response.data.daily[5].dt;
+	let DayFive = document.querySelector("#forecast-day-5-date");
+	DayFive.innerHTML = formatDay(forecastFive);
+
 	let uvi = document.querySelector("#uvi");
 	let uviValue = response.data.current.uvi;
 	uvi.innerHTML = Math.round(uviValue);
