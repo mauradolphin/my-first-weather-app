@@ -1,15 +1,15 @@
 /** @format */
 function showCelciusForecast(response) {
-	let dayOneHigh = Math.round(response.data.daily[0].temp.max);
-	let dayOneLow = Math.round(response.data.daily[0].temp.min);
-	let dayTwoHigh = Math.round(response.data.daily[1].temp.max);
-	let dayTwoLow = Math.round(response.data.daily[1].temp.min);
-	let dayThreeHigh = Math.round(response.data.daily[2].temp.max);
-	let dayThreeLow = Math.round(response.data.daily[2].temp.min);
-	let dayFourHigh = Math.round(response.data.daily[3].temp.max);
-	let dayFourLow = Math.round(response.data.daily[3].temp.min);
-	let dayFiveHigh = Math.round(response.data.daily[4].temp.max);
-	let dayFiveLow = Math.round(response.data.daily[4].temp.min);
+	let dayOneHigh = Math.round(response.data.daily[1].temp.max);
+	let dayOneLow = Math.round(response.data.daily[1].temp.min);
+	let dayTwoHigh = Math.round(response.data.daily[2].temp.max);
+	let dayTwoLow = Math.round(response.data.daily[2].temp.min);
+	let dayThreeHigh = Math.round(response.data.daily[3].temp.max);
+	let dayThreeLow = Math.round(response.data.daily[3].temp.min);
+	let dayFourHigh = Math.round(response.data.daily[4].temp.max);
+	let dayFourLow = Math.round(response.data.daily[4].temp.min);
+	let dayFiveHigh = Math.round(response.data.daily[5].temp.max);
+	let dayFiveLow = Math.round(response.data.daily[5].temp.min);
 
 	document.querySelector("#day-1-temp-high").innerHTML = `${dayOneHigh}°C`;
 	document.querySelector("#day-1-temp-low").innerHTML = `${dayOneLow}°C`;
@@ -23,56 +23,75 @@ function showCelciusForecast(response) {
 	document.querySelector("#day-5-temp-low").innerHTML = `${dayFiveLow}°C`;
 }
 
+function formatDay(timestamp) {
+	let date = new Date(timestamp * 1000);
+	let day = date.getDay();
+	let days = [
+		"Sunday",
+		"Monday",
+		"Tuesday",
+		"Wednesday",
+		"Thursday",
+		"Friday",
+		"Saturday",
+	];
+
+	return days[day];
+}
+
 function showForecast(response) {
+	console.log(response.data.daily);
+	let forecast = response.data.daily[1].dt;
+	let forecastDates = document.querySelector("#forecast-day-1-date");
+	forecastDates.innerHTML = formatDay(forecast);
 	let uvi = document.querySelector("#uvi");
 	let uviValue = response.data.current.uvi;
 	uvi.innerHTML = Math.round(uviValue);
 	let dayOneIconElement = document.querySelector("#icon-1");
-	let dayOneIcon = response.data.daily[0].weather[0].icon;
-	let iconUrl = `https://openweathermap.org/img/wn/`;
+	let dayOneIcon = response.data.daily[1].weather[0].icon;
 	dayOneIconElement.setAttribute("src", `images/${dayOneIcon}.png`);
 	dayOneIconElement.setAttribute(
 		"alt",
-		response.data.daily[0].weather[0].description
+		response.data.daily[1].weather[0].description
 	);
 	let dayTwoIconElement = document.querySelector("#icon-2");
-	let dayTwoIcon = response.data.daily[1].weather[0].icon;
+	let dayTwoIcon = response.data.daily[2].weather[0].icon;
 	dayTwoIconElement.setAttribute("src", `images/${dayTwoIcon}.png`);
 	dayTwoIconElement.setAttribute(
 		"alt",
-		response.data.daily[1].weather[0].description
+		response.data.daily[2].weather[0].description
 	);
 	let dayThreeIconElement = document.querySelector("#icon-3");
-	let dayThreeIcon = response.data.daily[2].weather[0].icon;
+	let dayThreeIcon = response.data.daily[3].weather[0].icon;
 	dayThreeIconElement.setAttribute("src", `images/${dayThreeIcon}.png`);
 	dayThreeIconElement.setAttribute(
 		"alt",
-		response.data.daily[2].weather[0].description
+		response.data.daily[3].weather[0].description
 	);
 	let dayFourIconElement = document.querySelector("#icon-4");
-	let dayFourIcon = response.data.daily[3].weather[0].icon;
+	let dayFourIcon = response.data.daily[4].weather[0].icon;
 	dayFourIconElement.setAttribute("src", `images/${dayFourIcon}.png`);
 	dayFourIconElement.setAttribute(
 		"alt",
-		response.data.daily[3].weather[0].description
+		response.data.daily[4].weather[0].description
 	);
 	let dayFiveIconElement = document.querySelector("#icon-5");
-	let dayFiveIcon = response.data.daily[4].weather[0].icon;
+	let dayFiveIcon = response.data.daily[5].weather[0].icon;
 	dayFiveIconElement.setAttribute("src", `images/${dayFiveIcon}.png`);
 	dayFiveIconElement.setAttribute(
 		"alt",
-		response.data.daily[4].weather[0].description
+		response.data.daily[5].weather[0].description
 	);
-	let dayOneHigh = Math.round(response.data.daily[0].temp.max);
-	let dayOneLow = Math.round(response.data.daily[0].temp.min);
-	let dayTwoHigh = Math.round(response.data.daily[1].temp.max);
-	let dayTwoLow = Math.round(response.data.daily[1].temp.min);
-	let dayThreeHigh = Math.round(response.data.daily[2].temp.max);
-	let dayThreeLow = Math.round(response.data.daily[2].temp.min);
-	let dayFourHigh = Math.round(response.data.daily[3].temp.max);
-	let dayFourLow = Math.round(response.data.daily[3].temp.min);
-	let dayFiveHigh = Math.round(response.data.daily[4].temp.max);
-	let dayFiveLow = Math.round(response.data.daily[4].temp.min);
+	let dayOneHigh = Math.round(response.data.daily[1].temp.max);
+	let dayOneLow = Math.round(response.data.daily[1].temp.min);
+	let dayTwoHigh = Math.round(response.data.daily[2].temp.max);
+	let dayTwoLow = Math.round(response.data.daily[2].temp.min);
+	let dayThreeHigh = Math.round(response.data.daily[3].temp.max);
+	let dayThreeLow = Math.round(response.data.daily[3].temp.min);
+	let dayFourHigh = Math.round(response.data.daily[4].temp.max);
+	let dayFourLow = Math.round(response.data.daily[4].temp.min);
+	let dayFiveHigh = Math.round(response.data.daily[5].temp.max);
+	let dayFiveLow = Math.round(response.data.daily[5].temp.min);
 
 	document.querySelector("#day-1-temp-high").innerHTML = `${dayOneHigh}°F`;
 	document.querySelector("#day-1-temp-low").innerHTML = `${dayOneLow}°F`;
