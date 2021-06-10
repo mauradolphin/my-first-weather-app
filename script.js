@@ -40,13 +40,11 @@ function formatDay(timestamp) {
 }
 
 function showForecast(response) {
-	console.log(response.data.daily);
 	let forecastOne = response.data.daily[1].dt;
 	let DayOne = document.querySelector("#forecast-day-1-date");
 	DayOne.innerHTML = formatDay(forecastOne);
 
 	let forecastTwo = response.data.daily[2].dt;
-	console.log(forecastTwo);
 	let DayTwo = document.querySelector("#forecast-day-2-date");
 	DayTwo.innerHTML = formatDay(forecastTwo);
 
@@ -65,6 +63,7 @@ function showForecast(response) {
 	let uvi = document.querySelector("#uvi");
 	let uviValue = response.data.current.uvi;
 	uvi.innerHTML = Math.round(uviValue);
+
 	let dayOneIconElement = document.querySelector("#icon-1");
 	let dayOneIcon = response.data.daily[1].weather[0].icon;
 	dayOneIconElement.setAttribute("src", `images/${dayOneIcon}.png`);
@@ -124,7 +123,6 @@ function showForecast(response) {
 }
 
 function showData(response) {
-	console.log(response);
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
 	fahrenheitLink.classList.add("active");
