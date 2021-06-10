@@ -36,7 +36,13 @@ function formatDay(timestamp) {
 		"Saturday",
 	];
 
-	return days[day];
+	let month = date.getMonth();
+	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
+	month = months[month];
+
+	let dayOfWeek = date.getDate();
+
+	return days[day] + `<br/><small>  ${month}/${dayOfWeek} </small>`;
 }
 
 function showForecast(response) {
@@ -123,13 +129,14 @@ function showForecast(response) {
 }
 
 function showData(response) {
+	console.log(response);
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
 	fahrenheitLink.classList.add("active");
 	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
 	let iconElement = document.querySelector("#today-icon");
-	iconElement.setAttribute("src", `images/${currentIcon}.png`);
+	iconElement.setAttribute("src", `images/${currentIcon}-main.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
@@ -257,7 +264,7 @@ function showLocalData(response) {
 	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
 	let iconElement = document.querySelector("#today-icon");
-	iconElement.setAttribute("src", `images/${currentIcon}.png`);
+	iconElement.setAttribute("src", `images/${currentIcon}-main.png`);
 	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
