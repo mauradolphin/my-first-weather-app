@@ -6,11 +6,11 @@ function showCelciusForecast(response) {
 			let high = Math.round(response.temp.max);
 			let low = Math.round(response.temp.min);
 			let tag1 = `#day-`;
-			let tag2 = `${index}`;
+			let indexTag = `${index}`;
 			let highTag = `-temp-high`;
 			let lowTag = `-temp-low`;
-			let highTempTag = tag1 + tag2 + highTag;
-			let lowTempTag = tag1 + tag2 + lowTag;
+			let highTempTag = tag1 + indexTag + highTag;
+			let lowTempTag = tag1 + indexTag + lowTag;
 			let highElement = document.querySelector(highTempTag);
 			let lowElement = document.querySelector(lowTempTag);
 			highElement.innerHTML = `${high}°C`;
@@ -42,86 +42,40 @@ function formatDay(timestamp) {
 }
 
 function showForecast(response) {
-	let forecastOne = response.data.daily[1].dt;
-	let DayOne = document.querySelector("#forecast-day-1-date");
-	DayOne.innerHTML = formatDay(forecastOne);
-
-	let forecastTwo = response.data.daily[2].dt;
-	let DayTwo = document.querySelector("#forecast-day-2-date");
-	DayTwo.innerHTML = formatDay(forecastTwo);
-
-	let forecastThree = response.data.daily[3].dt;
-	let DayThree = document.querySelector("#forecast-day-3-date");
-	DayThree.innerHTML = formatDay(forecastThree);
-
-	let forecastFour = response.data.daily[4].dt;
-	let DayFour = document.querySelector("#forecast-day-4-date");
-	DayFour.innerHTML = formatDay(forecastFour);
-
-	let forecastFive = response.data.daily[5].dt;
-	let DayFive = document.querySelector("#forecast-day-5-date");
-	DayFive.innerHTML = formatDay(forecastFive);
+	let daily = response.data.daily;
+	daily.forEach(function (response, index) {
+		if (index > 0 && index < 6) {
+			let high = Math.round(response.temp.max);
+			let low = Math.round(response.temp.min);
+			let tag1 = `#day-`;
+			let indexTag = `${index}`;
+			let highTag = `-temp-high`;
+			let lowTag = `-temp-low`;
+			let highTempTag = tag1 + indexTag + highTag;
+			let lowTempTag = tag1 + indexTag + lowTag;
+			let highElement = document.querySelector(highTempTag);
+			let lowElement = document.querySelector(lowTempTag);
+			highElement.innerHTML = `${high}°F`;
+			lowElement.innerHTML = `${low}°F`;
+			let forecast = response.dt;
+			let forecastTag = `#forecast-day-`;
+			let forecastTag3 = `-date`;
+			let forecastTagFull = forecastTag + indexTag + forecastTag3;
+			let forecastElement = document.querySelector(forecastTagFull);
+			forecastElement.innerHTML = formatDay(forecast);
+			let iconTag = `#icon-`;
+			let icon = response.weather[0].icon;
+			let description = response.weather[0].description;
+			let iconTagFull = iconTag + indexTag;
+			let iconElement = document.querySelector(iconTagFull);
+			iconElement.setAttribute("src", `images/${icon}.png`);
+			iconElement.setAttribute("alt", description);
+		}
+	});
 
 	let uvi = document.querySelector("#uvi");
 	let uviValue = response.data.current.uvi;
 	uvi.innerHTML = Math.round(uviValue);
-
-	let dayOneIconElement = document.querySelector("#icon-1");
-	let dayOneIcon = response.data.daily[1].weather[0].icon;
-	dayOneIconElement.setAttribute("src", `images/${dayOneIcon}.png`);
-	dayOneIconElement.setAttribute(
-		"alt",
-		response.data.daily[1].weather[0].description
-	);
-	let dayTwoIconElement = document.querySelector("#icon-2");
-	let dayTwoIcon = response.data.daily[2].weather[0].icon;
-	dayTwoIconElement.setAttribute("src", `images/${dayTwoIcon}.png`);
-	dayTwoIconElement.setAttribute(
-		"alt",
-		response.data.daily[2].weather[0].description
-	);
-	let dayThreeIconElement = document.querySelector("#icon-3");
-	let dayThreeIcon = response.data.daily[3].weather[0].icon;
-	dayThreeIconElement.setAttribute("src", `images/${dayThreeIcon}.png`);
-	dayThreeIconElement.setAttribute(
-		"alt",
-		response.data.daily[3].weather[0].description
-	);
-	let dayFourIconElement = document.querySelector("#icon-4");
-	let dayFourIcon = response.data.daily[4].weather[0].icon;
-	dayFourIconElement.setAttribute("src", `images/${dayFourIcon}.png`);
-	dayFourIconElement.setAttribute(
-		"alt",
-		response.data.daily[4].weather[0].description
-	);
-	let dayFiveIconElement = document.querySelector("#icon-5");
-	let dayFiveIcon = response.data.daily[5].weather[0].icon;
-	dayFiveIconElement.setAttribute("src", `images/${dayFiveIcon}.png`);
-	dayFiveIconElement.setAttribute(
-		"alt",
-		response.data.daily[5].weather[0].description
-	);
-	let dayOneHigh = Math.round(response.data.daily[1].temp.max);
-	let dayOneLow = Math.round(response.data.daily[1].temp.min);
-	let dayTwoHigh = Math.round(response.data.daily[2].temp.max);
-	let dayTwoLow = Math.round(response.data.daily[2].temp.min);
-	let dayThreeHigh = Math.round(response.data.daily[3].temp.max);
-	let dayThreeLow = Math.round(response.data.daily[3].temp.min);
-	let dayFourHigh = Math.round(response.data.daily[4].temp.max);
-	let dayFourLow = Math.round(response.data.daily[4].temp.min);
-	let dayFiveHigh = Math.round(response.data.daily[5].temp.max);
-	let dayFiveLow = Math.round(response.data.daily[5].temp.min);
-
-	document.querySelector("#day-1-temp-high").innerHTML = `${dayOneHigh}°F`;
-	document.querySelector("#day-1-temp-low").innerHTML = `${dayOneLow}°F`;
-	document.querySelector("#day-2-temp-high").innerHTML = `${dayTwoHigh}°F`;
-	document.querySelector("#day-2-temp-low").innerHTML = `${dayTwoLow}°F`;
-	document.querySelector("#day-3-temp-high").innerHTML = `${dayThreeHigh}°F`;
-	document.querySelector("#day-3-temp-low").innerHTML = `${dayThreeLow}°F`;
-	document.querySelector("#day-4-temp-high").innerHTML = `${dayFourHigh}°F`;
-	document.querySelector("#day-4-temp-low").innerHTML = `${dayFourLow}°F`;
-	document.querySelector("#day-5-temp-high").innerHTML = `${dayFiveHigh}°F`;
-	document.querySelector("#day-5-temp-low").innerHTML = `${dayFiveLow}°F`;
 }
 
 function showData(response) {
