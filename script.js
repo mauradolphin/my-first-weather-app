@@ -13,6 +13,7 @@ function showCelciusForecast(response) {
 			let lowTempTag = tag1 + indexTag + lowTag;
 			let highElement = document.querySelector(highTempTag);
 			let lowElement = document.querySelector(lowTempTag);
+
 			highElement.innerHTML = `${high}°C`;
 			lowElement.innerHTML = `${low}°C`;
 		}
@@ -34,10 +35,9 @@ function formatDay(timestamp) {
 
 	let month = date.getMonth();
 	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
-	month = months[month];
-
 	let dayOfWeek = date.getDate();
 
+	month = months[month];
 	return days[day] + `<br/><small>  ${month}/${dayOfWeek} </small>`;
 }
 
@@ -55,19 +55,20 @@ function showForecast(response) {
 			let lowTempTag = tag1 + indexTag + lowTag;
 			let highElement = document.querySelector(highTempTag);
 			let lowElement = document.querySelector(lowTempTag);
-			highElement.innerHTML = `${high}°F`;
-			lowElement.innerHTML = `${low}°F`;
 			let forecast = response.dt;
 			let forecastTag = `#forecast-day-`;
 			let forecastTag3 = `-date`;
 			let forecastTagFull = forecastTag + indexTag + forecastTag3;
 			let forecastElement = document.querySelector(forecastTagFull);
-			forecastElement.innerHTML = formatDay(forecast);
 			let iconTag = `#icon-`;
 			let icon = response.weather[0].icon;
 			let description = response.weather[0].description;
 			let iconTagFull = iconTag + indexTag;
 			let iconElement = document.querySelector(iconTagFull);
+
+			highElement.innerHTML = `${high}°F`;
+			lowElement.innerHTML = `${low}°F`;
+			forecastElement.innerHTML = formatDay(forecast);
 			iconElement.setAttribute("src", `images/${icon}.png`);
 			iconElement.setAttribute("alt", description);
 		}
@@ -82,12 +83,8 @@ function showData(response) {
 	console.log(response);
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
-	fahrenheitLink.classList.add("active");
-	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
 	let iconElement = document.querySelector("#today-icon");
-	iconElement.setAttribute("src", `images/${currentIcon}-main.png`);
-	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");
@@ -101,12 +98,9 @@ function showData(response) {
 	let temperatureLow = document.querySelector("#temp-low");
 	let dateElement = document.querySelector("#full-date-hour");
 	let timestamp = response.data.dt;
-	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
 	let feelsLike = response.data.main.feels_like;
 	let feelsLikeElement = document.querySelector("#feels-like-display");
-	feelsLikeElement.innerHTML = Math.round(feelsLike);
 	let feelsLikeUnit = document.querySelector("#feels-like-unit");
-	feelsLikeUnit.innerHTML = "°F";
 	let city = response.data.name;
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
@@ -115,6 +109,13 @@ function showData(response) {
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=currently,minutely,hourly,alerts&appid=${apiKey}&units=${units}`;
 
+	fahrenheitLink.classList.add("active");
+	celciusLink.classList.remove("active");
+	iconElement.setAttribute("src", `images/${currentIcon}-main.png`);
+	iconElement.setAttribute("alt", response.data.weather[0].description);
+	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	feelsLikeUnit.innerHTML = "°F";
 	windElement.innerHTML = Math.round(windSpeed);
 	description.innerHTML = conditions;
 	humidity.innerHTML = response.data.main.humidity;
@@ -129,30 +130,32 @@ function showData(response) {
 function showCelciusClick(response) {
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
-	fahrenheitLink.classList.remove("active");
-	celciusLink.classList.add("active");
 	let celciusTemp = Math.round(response.data.main.temp);
 	let newCelciusTemp = document.querySelector("#current-temp");
-	newCelciusTemp.innerHTML = celciusTemp;
 	let celciusHigh = document.querySelector("#temp-high");
 	let resultHigh = Math.round(response.data.main.temp_max);
-	celciusHigh.innerHTML = `${resultHigh}°C`;
 	let celciusLow = document.querySelector("#temp-low");
 	let resultLow = Math.round(response.data.main.temp_min);
-	celciusLow.innerHTML = `${resultLow}°C`;
 	let city = response.data.name;
-	city = city.toLowerCase();
 	let feelsLike = response.data.main.feels_like;
 	let feelsLikeElement = document.querySelector("#feels-like-display");
-	feelsLikeElement.innerHTML = Math.round(feelsLike);
 	let feelsLikeUnit = document.querySelector("#feels-like-unit");
-	feelsLikeUnit.innerHTML = "°C";
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/onecall`;
 	let units = "metric";
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=current.minutelyt,hourly,alerts&appid=${apiKey}&units=${units}`;
+
+	fahrenheitLink.classList.remove("active");
+	celciusLink.classList.add("active");
+	newCelciusTemp.innerHTML = celciusTemp;
+	celciusHigh.innerHTML = `${resultHigh}°C`;
+	celciusLow.innerHTML = `${resultLow}°C`;
+	city = city.toLowerCase();
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	feelsLikeUnit.innerHTML = "°C";
+
 	axios.get(apiUrl).then(showCelciusForecast);
 }
 
@@ -169,30 +172,32 @@ function clickCelcius(event) {
 function showFahrenheitClick(response) {
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
-	fahrenheitLink.classList.add("active");
-	celciusLink.classList.remove("active");
 	let fahrenheitTemp = Math.round(response.data.main.temp);
 	let newFahrenheitTemp = document.querySelector("#current-temp");
-	newFahrenheitTemp.innerHTML = fahrenheitTemp;
 	let fahrenheitHigh = document.querySelector("#temp-high");
 	let fahrenheitResultHigh = Math.round(response.data.main.temp_max);
-	fahrenheitHigh.innerHTML = `${fahrenheitResultHigh}°F`;
 	let fahrenheitLow = document.querySelector("#temp-low");
 	let fahrenheitResultLow = Math.round(response.data.main.temp_min);
-	fahrenheitLow.innerHTML = `${fahrenheitResultLow}°F`;
 	let feelsLike = response.data.main.feels_like;
 	let feelsLikeElement = document.querySelector("#feels-like-display");
-	feelsLikeElement.innerHTML = Math.round(feelsLike);
 	let feelsLikeUnit = document.querySelector("#feels-like-unit");
-	feelsLikeUnit.innerHTML = "°F";
 	let city = response.data.name;
-	city = city.toLowerCase();
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/onecall`;
 	let units = "imperial";
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=current.minutelyt,hourly,alerts&appid=${apiKey}&units=${units}`;
+
+	fahrenheitLink.classList.add("active");
+	celciusLink.classList.remove("active");
+	newFahrenheitTemp.innerHTML = fahrenheitTemp;
+	fahrenheitHigh.innerHTML = `${fahrenheitResultHigh}°F`;
+	fahrenheitLow.innerHTML = `${fahrenheitResultLow}°F`;
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	feelsLikeUnit.innerHTML = "°F";
+	city = city.toLowerCase();
+
 	axios.get(apiUrl).then(showForecast);
 }
 
@@ -210,12 +215,8 @@ function clickFahrenheit(event) {
 function showLocalData(response) {
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
-	fahrenheitLink.classList.add("active");
-	celciusLink.classList.remove("active");
 	let currentIcon = response.data.weather[0].icon;
 	let iconElement = document.querySelector("#today-icon");
-	iconElement.setAttribute("src", `images/${currentIcon}-main.png`);
-	iconElement.setAttribute("alt", response.data.weather[0].description);
 	let windElement = document.querySelector("#wind");
 	let windSpeed = response.data.wind.speed;
 	let description = document.querySelector("#condition-description");
@@ -232,11 +233,8 @@ function showLocalData(response) {
 	let dateElement = document.querySelector("#full-date-hour");
 	let feelsLike = response.data.main.feels_like;
 	let feelsLikeElement = document.querySelector("#feels-like-display");
-	feelsLikeElement.innerHTML = Math.round(feelsLike);
 	let feelsLikeUnit = document.querySelector("#feels-like-unit");
-	feelsLikeUnit.innerHTML = "°F";
 	let timestamp = response.data.dt;
-	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
 	let latitude = response.data.coord.lat;
 	let longitude = response.data.coord.lon;
 	let apiEndpoint = `https://api.openweathermap.org/data/2.5/onecall`;
@@ -244,6 +242,13 @@ function showLocalData(response) {
 	let apiKey = "52e52eb6f8e287f91bec28fc7ec32f3b";
 	let apiUrl = `${apiEndpoint}?lat=${latitude}&lon=${longitude}&exclude=current.minutelyt,hourly,alerts&appid=${apiKey}&units=${units}`;
 
+	fahrenheitLink.classList.add("active");
+	celciusLink.classList.remove("active");
+	iconElement.setAttribute("src", `images/${currentIcon}-main.png`);
+	iconElement.setAttribute("alt", response.data.weather[0].description);
+	feelsLikeElement.innerHTML = Math.round(feelsLike);
+	feelsLikeUnit.innerHTML = "°F";
+	dateElement.innerHTML = displaySearchedDate(timestamp * 1000);
 	windElement.innerHTML = Math.round(windSpeed);
 	description.innerHTML = conditions;
 	humidity.innerHTML = response.data.main.humidity;
@@ -251,6 +256,7 @@ function showLocalData(response) {
 	temperatureHigh.innerHTML = `${tempHigh}°F`;
 	temperatureLow.innerHTML = `${tempLow}°F`;
 	currentCityDisplay.innerHTML = city;
+
 	document.querySelector("#humidity").innerHTML = response.data.main.humidity;
 
 	axios.get(apiUrl).then(showForecast);
