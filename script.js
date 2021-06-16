@@ -80,7 +80,6 @@ function showForecast(response) {
 }
 
 function showData(response) {
-	console.log(response);
 	let fahrenheitLink = document.querySelector("#degrees-fahrenheit");
 	let celciusLink = document.querySelector("#degrees-celcius");
 	let currentIcon = response.data.weather[0].icon;
@@ -309,7 +308,6 @@ function displaySearchedDate(timestamp) {
 	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 	let month = months[date.getMonth()];
 	let dayOfWeek = date.getDate();
-	console.log(day);
 	if ((day = "Wednesday")) {
 		day = "<small>" + "Wednesday" + "</small>";
 	}
