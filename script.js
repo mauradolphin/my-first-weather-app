@@ -1,26 +1,22 @@
 /** @format */
 function showCelciusForecast(response) {
-	let dayOneHigh = Math.round(response.data.daily[1].temp.max);
-	let dayOneLow = Math.round(response.data.daily[1].temp.min);
-	let dayTwoHigh = Math.round(response.data.daily[2].temp.max);
-	let dayTwoLow = Math.round(response.data.daily[2].temp.min);
-	let dayThreeHigh = Math.round(response.data.daily[3].temp.max);
-	let dayThreeLow = Math.round(response.data.daily[3].temp.min);
-	let dayFourHigh = Math.round(response.data.daily[4].temp.max);
-	let dayFourLow = Math.round(response.data.daily[4].temp.min);
-	let dayFiveHigh = Math.round(response.data.daily[5].temp.max);
-	let dayFiveLow = Math.round(response.data.daily[5].temp.min);
-
-	document.querySelector("#day-1-temp-high").innerHTML = `${dayOneHigh}°C`;
-	document.querySelector("#day-1-temp-low").innerHTML = `${dayOneLow}°C`;
-	document.querySelector("#day-2-temp-high").innerHTML = `${dayTwoHigh}°C`;
-	document.querySelector("#day-2-temp-low").innerHTML = `${dayTwoLow}°C`;
-	document.querySelector("#day-3-temp-high").innerHTML = `${dayThreeHigh}°C`;
-	document.querySelector("#day-3-temp-low").innerHTML = `${dayThreeLow}°C`;
-	document.querySelector("#day-4-temp-high").innerHTML = `${dayFourHigh}°C`;
-	document.querySelector("#day-4-temp-low").innerHTML = `${dayFourLow}°C`;
-	document.querySelector("#day-5-temp-high").innerHTML = `${dayFiveHigh}°C`;
-	document.querySelector("#day-5-temp-low").innerHTML = `${dayFiveLow}°C`;
+	let daily = response.data.daily;
+	daily.forEach(function (response, index) {
+		if (index > 0 && index < 6) {
+			let high = Math.round(response.temp.max);
+			let low = Math.round(response.temp.min);
+			let tag1 = `#day-`;
+			let tag2 = `${index}`;
+			let highTag = `-temp-high`;
+			let lowTag = `-temp-low`;
+			let highTempTag = tag1 + tag2 + highTag;
+			let lowTempTag = tag1 + tag2 + lowTag;
+			let highElement = document.querySelector(highTempTag);
+			let lowElement = document.querySelector(lowTempTag);
+			highElement.innerHTML = `${high}°C`;
+			lowElement.innerHTML = `${low}°C`;
+		}
+	});
 }
 
 function formatDay(timestamp) {
