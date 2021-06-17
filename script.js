@@ -18,6 +18,9 @@ function showCelciusForecast(response) {
 			lowElement.innerHTML = `${low}°C`;
 		}
 	});
+	let uvi = document.querySelector("#uvi");
+	let uviValue = response.data.current.uvi;
+	uvi.innerHTML = Math.round(uviValue);
 }
 
 function formatDay(timestamp) {
@@ -308,8 +311,10 @@ function displaySearchedDate(timestamp) {
 	let months = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"];
 	let month = months[date.getMonth()];
 	let dayOfWeek = date.getDate();
-	if ((day = "Wednesday")) {
+	if (day === "Wednesday") {
 		day = "<small>" + "Wednesday" + "</small>";
+	} else {
+		day = days[date.getDay()];
 	}
 	let year = date.getFullYear();
 	return `${day} ${month}/${dayOfWeek}/${year} ${hours}:${minutes}`;
